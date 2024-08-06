@@ -9,7 +9,7 @@ build:
 
 
 # 获取当前tag，并计算出下个tag
-latest_tag = $(shell git describe --abbrev=0 --tags 2>/dev/null || echo "v0.0.0")
+latest_tag = $(shell git tag --sort=-v:refname | head -n 1 2>/dev/null || echo "v0.0.0")
 tag_prefix := $(shell echo $(latest_tag) | sed -n 's/^\(v[0-9]\.[0-9]\.\).*/\1/p')
 last_version := $(shell echo $(latest_tag) | sed -n 's/^v[0-9]*\.[0-9]*.\([0-9]*\)/\1/p')
 next_version = $(shell expr $(last_version) + 1)
